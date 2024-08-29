@@ -1,12 +1,12 @@
 @import "~@project-sunbird/sb-styles/assets/variables";
 @import "./mixins/mixins";
 
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 
 @include mat-core();
 
 $custom-typography: mat-typography-config(
-  $font-family: 'var(--font-stack-en) !important',
+  $font-family: "var(--font-stack-en) !important",
 );
 
 @include angular-material-typography($custom-typography);
@@ -21,7 +21,7 @@ body {
 }
 
 body {
-  background: var(--sbt-body-bg) !important;
+  background: #ffbc0154 !important;
   position: relative;
   font-family: var(--font-stack-en) !important;
   letter-spacing: 0.2px;
@@ -33,7 +33,7 @@ body {
   &.pushable {
     background: var(--rc-E5EDF5) !important;
 
-    &>.pusher {
+    & > .pusher {
       background: transparent !important;
 
       &.dimmed {
@@ -75,10 +75,9 @@ body {
   text-transform: capitalize;
 }
 
-.publicmenusection.ui.secondary.vertical.menu>.item {
+.publicmenusection.ui.secondary.vertical.menu > .item {
   text-transform: capitalize;
 }
-
 
 [dir="rtl"] {
   .sb-explore-qr-container {
@@ -176,7 +175,7 @@ ol.ui.list ol {
 }
 
 .ui.selection.dropdown:focus,
-.ui.selection.dropdown:focus~label {
+.ui.selection.dropdown:focus ~ label {
   border: 1px solid var(--primary-300);
 }
 
@@ -187,11 +186,10 @@ ol.ui.list ol {
   left: inherit;
 }
 
-.ui.dropdown .menu>.item {
+.ui.dropdown .menu > .item {
   padding: 1em 1.5em !important;
   font-size: 0.86rem;
 }
-
 
 .licenseTag {
   word-break: break-all;
@@ -240,7 +238,6 @@ app-workspace {
     }
   }
 }
-
 
 .sb-modal-addsummary {
   .ck.ck-editor__editable_inline {
@@ -295,7 +292,7 @@ app-workspace {
   box-shadow: 0 4px 8px 0px rgba(var(--rc-rgba-black), 0.25) !important;
 }
 
-// Footer fix 
+// Footer fix
 
 .theme .footer-fix {
   // padding-bottom: calculateRem(160px);
@@ -334,8 +331,6 @@ app-workspace {
   display: none !important;
 }
 
-
-
 /* new theme */
 
 
@@ -364,7 +359,6 @@ app-workspace {
   padding-bottom: calculateRem(8px);
 
   @include respond-above(sm) {
-
     align-items: flex-end;
   }
 
@@ -416,7 +410,6 @@ app-workspace {
     background: var(--sbt-body-bg2);
   }
 
-
   &__div {
     position: relative;
     z-index: 99;
@@ -428,7 +421,7 @@ app-workspace {
 }
 
 .sbt-theme-bg-img {
-  display:none;
+  display: none;
   position: fixed;
   z-index: -50;
   left: calculateRem(-106px);
@@ -582,7 +575,6 @@ app-workspace {
     padding: 0px 16px;
     background: var(--sbt-compt-bg) !important;
   }
-
 }
 
 /* rtl for sbt filter */
@@ -624,7 +616,7 @@ html[dir="rtl"] {
     font-size: calculateRem(14px) !important;
   }
 
-  html[data-theme='Default'] .lib-chat-head {
+  html[data-theme="Default"] .lib-chat-head {
     top: 5.75rem !important;
     z-index: inherit !important;
   }
@@ -644,7 +636,7 @@ html[dir="rtl"] {
 }
 
 .notAllowedCursor {
-  cursor: not-allowed
+  cursor: not-allowed;
 }
 
 #report-summary .ui.unordered.list .item {
@@ -678,13 +670,11 @@ html[dir="rtl"] {
   }
 }
 
-
 html.PlayerMediaQueryClass {
   @include respond-above(xl) {
     font-size: calc(12px + (18 - 12) * ((100vw - 320px) / (1920 - 320)));
   }
 }
-
 
 .sb-notification-modal {
   .ui.modal {
@@ -771,13 +761,13 @@ html.PlayerMediaQueryClass {
   font-size: calculateRem(12px);
 }
 
-.sb-modal.sb-onboard-modal .ui.modal>.close {
+.sb-modal.sb-onboard-modal .ui.modal > .close {
   height: 1.5rem;
   width: 1.5rem;
   border-radius: 50%;
   box-shadow: var(--sbt-box-shadow-3px);
-  right: .75rem !important;
-  top: .75rem !important;
+  right: 0.75rem !important;
+  top: 0.75rem !important;
   background-color: var(--white);
 
   &::before {
@@ -853,17 +843,17 @@ app-landing-page {
   }
 
   .ui.card,
-  .ui.cards>.card {
+  .ui.cards > .card {
     background: var(--sb-landing-page-cards);
   }
 
-  .ui.card>.content>.description,
-  .ui.cards>.card>.content>.description {
+  .ui.card > .content > .description,
+  .ui.cards > .card > .content > .description {
     color: var(--sb-landing-page-cards-desc);
   }
 
-  .ui.list .list>.item .description,
-  .ui.list>.item .description {
+  .ui.list .list > .item .description,
+  .ui.list > .item .description {
     color: var(--sb-landing-page-cards-desc);
   }
 
@@ -874,16 +864,13 @@ app-landing-page {
   }
 }
 
-.sb-btn-secondary,
-.sb-btn-primary {
-  color: var(--sb-btn-default-color);
-}
-
 // .sb-btn-outline-primary,
 // .sb-btn-outline-secondary {
 // background-color: var(--sb-btn-default-color);
 // }
-
+button.view-all-info.sb-btn.sb-btn-normal.sb-btn-outline-secondary.sb-btn-white {
+  color: #000;
+}
 /* header tail black bar */
 .brand-header-tail {
   background: var(--brand-header-tail-bg);
@@ -975,12 +962,15 @@ app-landing-page {
       }
     }
 
-    .skip-content-link {}
+    .skip-content-link {
+    }
 
     .screen-reader-link,
-    .sitemap-link {}
+    .sitemap-link {
+    }
 
-    .sitemap-link {}
+    .sitemap-link {
+    }
   }
 
   .fontResize-container {
@@ -992,7 +982,7 @@ app-landing-page {
       font-size: 0.85rem;
     }
 
-    .fontResizeBtn_A+ {
+    .fontResizeBtn_A + {
       font-size: 1rem;
     }
 
@@ -1007,7 +997,7 @@ app-landing-page {
       justify-content: center;
       margin: 0px 0.25rem;
       padding: 0px 0.5rem;
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
       border-radius: 50%;
 
       &:hover,
@@ -1046,7 +1036,7 @@ app-landing-page {
     padding: 0px;
     background: none;
     cursor: pointer;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
       outline: none;
@@ -1099,7 +1089,7 @@ a.ui.labels .label:hover {
   background: var(--state-medium-container-bg) !important;
 }
 
-.ui.selection.visible.dropdown>.text:not(.default) {
+.ui.selection.visible.dropdown > .text:not(.default) {
   color: var(--sb-dropdown-menu-text);
 }
 
@@ -1116,7 +1106,8 @@ a.ui.labels .label:hover {
 
 .sb-modal .ui.modal {
   .sb-modal-header {
-    color: var(--sb-modal-header-text);
+    color: #fff;
+    background-color: #065872;
   }
 
   .sb-modal-content {
@@ -1130,8 +1121,7 @@ a.ui.labels .label:hover {
 
 // Buttons
 .sb-btn-outline-primary {
-  html[data-theme=Darkmode] & {
-
+  html[data-theme="Darkmode"] & {
     &:hover,
     &:active,
     &.active {
@@ -1172,7 +1162,6 @@ a.ui.labels .label:hover {
 .sb-notification-container {
   .clear-text {
     cursor: pointer;
-    ;
   }
 }
 
@@ -1201,10 +1190,13 @@ a.ui.labels .label:hover {
   color: var(--cc-grade-pill-text-hover) !important;
 }
 
-.sbt-class-bar .sb-slider-pills-container .sb-pills-container .pill.active:hover {
+.sbt-class-bar
+  .sb-slider-pills-container
+  .sb-pills-container
+  .pill.active:hover {
   background-color: var(--cc-grade-pill-bg-hover) !important;
   color: var(--cc-grade-pill-text-hover) !important;
-  box-shadow: 0 3px 4px 0 rgba(var(--rc-rgba-black), .19) !important;
+  box-shadow: 0 3px 4px 0 rgba(var(--rc-rgba-black), 0.19) !important;
 }
 
 //moved from themes
@@ -1217,7 +1209,7 @@ a.ui.labels .label:hover {
 }
 
 // theme custom changes
-html[layout='joy'] {
+html[layout="joy"] {
   .sbt-sticky-topbar.sb-fontresizecontainer {
     position: sticky;
 
@@ -1243,7 +1235,7 @@ html[layout='joy'] {
   }
 }
 
-html[data-theme=Darkmode][layout='old'] {
+html[data-theme="Darkmode"][layout="old"] {
   .sb-fontresizecontainer.sbt-sticky {
     position: relative;
   }
@@ -1253,13 +1245,13 @@ html[data-theme=Darkmode][layout='old'] {
   }
 }
 
-html[data-theme='Darkmode'][layout='joy'] {}
+html[data-theme="Darkmode"][layout="joy"] {
+}
 
 //portal
-@media screen and (min-width:1024px) and (max-width:1199px) {
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
   *[lang="ta"] {
     .sb-header-list-items {
-
       .ui.text.menu .item a.item,
       .status-container__title {
         max-width: 100px;
@@ -1273,10 +1265,9 @@ html[data-theme='Darkmode'][layout='joy'] {}
   }
 }
 
-@media screen and (min-width:1200px) and (max-width:1280px) {
+@media screen and (min-width: 1200px) and (max-width: 1280px) {
   *[lang="ta"] {
     .sb-header-list-items {
-
       .ui.text.menu .item a.item,
       .status-container__title {
         max-width: 170px;
@@ -1290,15 +1281,18 @@ html[data-theme='Darkmode'][layout='joy'] {}
   }
 }
 
+<<<<<<< HEAD
 //desktop
 .sb-desktop-filter-section .status-container__title {
   max-width: 100% !important;
 }
 
 @media screen and (min-width:1024px) and (max-width:1199px) {
+=======
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
   *[lang="ta"] {
     .sb-desktop-header-list-items {
-
       .ui.text.menu .item a.item,
       .status-container__title {
         max-width: 75px;
@@ -1312,10 +1306,9 @@ html[data-theme='Darkmode'][layout='joy'] {}
   }
 }
 
-@media screen and (min-width:1200px) and (max-width:1600px) {
+@media screen and (min-width: 1200px) and (max-width: 1600px) {
   *[lang="ta"] {
     .sb-desktop-header-list-items {
-
       .ui.text.menu .item a.item,
       .status-container__title {
         max-width: 90px;
@@ -1336,22 +1329,22 @@ html[data-theme='Darkmode'][layout='joy'] {}
 }
 
 // tab index css
-*:focus-visible{
+*:focus-visible {
   border: 0.0625rem #fe0000 solid !important;
   border-radius: 0.25rem;
   outline: none;
 }
-.profile-avtar:focus-within{
+.profile-avtar:focus-within {
   border: 1px #fe0000 solid !important;
   border-radius: 5px;
   outline: none;
 }
-input[type=radio]:focus-visible, input[type=checkbox]:focus-visible{
+input[type="radio"]:focus-visible,
+input[type="checkbox"]:focus-visible {
   outline: 2px solid #fe0000;
   border-radius: 5px;
-  
 }
-.sb-checkbox.sb-checkbox-primary.sb-checkbox-rightaligned label:focus-within{
+.sb-checkbox.sb-checkbox-primary.sb-checkbox-rightaligned label:focus-within {
   outline: 2px solid #fe0000;
   border-radius: 5px;
 }
@@ -1361,7 +1354,9 @@ input[type=radio]:focus-visible, input[type=checkbox]:focus-visible{
 .contentViewerIframeShadow.player-fullscreen.content-full-video epub-viewer {
   height: calc(100% - 7rem);
 }
-.contentViewerIframeShadow.player-fullscreen.content-full-video quml-main-player .main-container {
+.contentViewerIframeShadow.player-fullscreen.content-full-video
+  quml-main-player
+  .main-container {
   height: calc(100vh - 4rem);
 }
 .notVisible {
@@ -1369,8 +1364,15 @@ input[type=radio]:focus-visible, input[type=checkbox]:focus-visible{
   position: relative !important;
 }
 
-.contentViewerIframeShadow sunbird-pdf-player sb-player-side-menu-icon.notVisible,
-#playerFullscreen.player-fullscreen sunbird-pdf-player sb-player-side-menu-icon.notVisible, .contentViewerIframeShadow sunbird-epub-player sb-player-side-menu-icon.notVisible {
+.contentViewerIframeShadow
+  sunbird-pdf-player
+  sb-player-side-menu-icon.notVisible,
+#playerFullscreen.player-fullscreen
+  sunbird-pdf-player
+  sb-player-side-menu-icon.notVisible,
+.contentViewerIframeShadow
+  sunbird-epub-player
+  sb-player-side-menu-icon.notVisible {
   top: 0 !important;
   position: absolute !important;
 }
@@ -1379,7 +1381,10 @@ input[type=radio]:focus-visible, input[type=checkbox]:focus-visible{
   height: calc(100% - 3rem) !important;
 }
 
-.contentViewerIframeShadow.player-fullscreen sunbird-pdf-player pdf-viewer iframe {
+.contentViewerIframeShadow.player-fullscreen
+  sunbird-pdf-player
+  pdf-viewer
+  iframe {
   height: calc(100% - 7rem) !important;
 }
 
@@ -1392,12 +1397,17 @@ iframe#contentPlayer.player-fullscreen {
   height: calc(100% - 4rem) !important;
 }
 
-.contentViewerIframeShadow quml-player .quml-container sb-player-side-menu-icon.notVisible {
+.contentViewerIframeShadow
+  quml-player
+  .quml-container
+  sb-player-side-menu-icon.notVisible {
   position: inherit !important;
 }
 
-html[layout=joy] .player-fullscreen-action-items .content-video__player__details,
-html[layout=joy] #playerFullscreen .contentViewerIframeShadow {
+html[layout="joy"]
+  .player-fullscreen-action-items
+  .content-video__player__details,
+html[layout="joy"] #playerFullscreen .contentViewerIframeShadow {
   border-radius: 0px !important;
 }
 
@@ -1405,19 +1415,30 @@ html[layout="joy"] .contentViewerIframeShadow {
   overflow: hidden;
 }
 
-html[layout="old"] sunbird-pdf-player .sb-player-splash-container .loading-text {
-  color:var(--white);
+html[layout="old"]
+  sunbird-pdf-player
+  .sb-player-splash-container
+  .loading-text {
+  color: var(--white);
 }
-html[data-theme=Darkmode][layout='old'] {
-  sunbird-pdf-player .sb-player-splash-container .loading-text{
+html[data-theme="Darkmode"][layout="old"] {
+  sunbird-pdf-player .sb-player-splash-container .loading-text {
     color: var(--black);
   }
 }
-.contentViewerIframeShadow.player-fullscreen.content-full-video sunbird-pdf-player .player-endpage, .contentViewerIframeShadow.player-fullscreen.content-full-video sunbird-pdf-player .sb-player-splash-container, .contentViewerIframeShadow.player-fullscreen.content-full-video sunbird-epub-player .sb-player-splash-container {
-  height: calc(100% - 4rem)!important;
+.contentViewerIframeShadow.player-fullscreen.content-full-video
+  sunbird-pdf-player
+  .player-endpage,
+.contentViewerIframeShadow.player-fullscreen.content-full-video
+  sunbird-pdf-player
+  .sb-player-splash-container,
+.contentViewerIframeShadow.player-fullscreen.content-full-video
+  sunbird-epub-player
+  .sb-player-splash-container {
+  height: calc(100% - 4rem) !important;
 }
 
-sb-pills-grid{
+sb-pills-grid {
   .sb-label-grid.show-ellipsis .item label {
     @supports (-webkit-box-orient: vertical) {
       -webkit-box-orient: vertical !important;
@@ -1428,19 +1449,41 @@ sb-pills-grid{
 
 //epup player splash
 sunbird-epub-player .sunbird-epub-container {
-  div:first-child{
+  div:first-child {
     height: inherit;
-    sb-player-start-page{
-      .sb-player-splash-container{
+    sb-player-start-page {
+      .sb-player-splash-container {
         height: 100% !important;
       }
     }
   }
-  .epub-container sb-player-sidebar .navBlock .player-nav-unit{
+  .epub-container sb-player-sidebar .navBlock .player-nav-unit {
     height: auto !important;
   }
 }
+<<<<<<< HEAD
 .contentViewerIframeShadow.player-fullscreen.content-full-video sunbird-epub-player .sb-player-splash-container{
+=======
+.PlayerMediaQueryClass
+  sunbird-epub-player
+  .sunbird-epub-container
+  div:first-child.rendition {
+  height: auto;
+}
+.PlayerMediaQueryClass
+  .contentViewerIframeShadow.player-fullscreen.content-full-video
+  sunbird-epub-player
+  .sb-player-splash-container {
+  height: calc(100% - 4rem) !important;
+}
+.PlayerMediaQueryClass .sb-epub-reading-status,
+.PlayerMediaQueryClass .sb-pdf-reading-status {
+  bottom: 4.75rem !important;
+}
+.contentViewerIframeShadow.player-fullscreen.content-full-video
+  sunbird-epub-player
+  .sb-player-splash-container {
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
   height: 100% !important;
 }
 
@@ -1452,7 +1495,7 @@ html[layout="joy"] .sb-modal-content .ui.center.aligned.segment {
   line-height: normal;
 }
 .required-asterisk {
-  color: #A80011;
+  color: #a80011;
 }
 // .mat-dialog-container{
 //   box-shadow: none;
@@ -1571,6 +1614,7 @@ html[layout='joy'] {
 .dt-page-container{
   padding: 7rem;
 }
+<<<<<<< HEAD
 .border14 .ui-calendar-w-btn,.workspacesegment .ui-calendar-w-btn{
   display: flex;
 }
@@ -1650,4 +1694,63 @@ html[layout=joy] .accordion-menu .sb-accordion-content.sb-bg-color-white {
 }
 html[layout=joy] .accordion-menu  .ui.accordion .active.title .chevron.down.icon{
   vertical-align: text-bottom;
+=======
+.startpage__instruction .startpage__instr-desc p.text-right {
+  padding-right: 8px !important;
+}
+[dir="rtl"] {
+  .contentViewerIframeShadow {
+    transform: translate(50%, -50%) !important;
+  }
+}
+
+.sbaccordion__panel-header__title .sb-checkbox,
+.sbselectpopover .sb-checkbox {
+  padding: 0 0;
+  margin-top: 0;
+}
+html[layout="joy"] sb-form .multi-select-container .list-border {
+  padding: 0px !important;
+  border: inherit !important;
+}
+
+/* error page */
+.error-page {
+  padding: 0 5%;
+  @include respond-below(sm) {
+    padding: 0 1%;
+  }
+  .logo {
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    img {
+      min-height: 65%;
+      height: 80%;
+    }
+  }
+  .error-img img {
+    max-width: 35.375rem;
+    width: 100%;
+    @include respond-below(sm) {
+      max-width: 25rem;
+    }
+  }
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
+}
+.sb-btn-disabled {
+  background: #cacccc70 !important;
+  border: none !important;
+}
+.custom-nulp-button{
+  border: none!important;
+  border-radius: 10px!important;
+  color: #fff!important;
+  font-size: 12px!important;
+  font-weight: 500!important;
+  padding: 9px 32px;
+  text-align: center!important;
+  text-decoration: none!important;
+  background: #057184!important;
+  cursor:pointer;
 }

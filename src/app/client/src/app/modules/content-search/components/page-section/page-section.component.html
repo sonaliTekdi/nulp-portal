@@ -9,9 +9,14 @@
         </h4>
         <!--/Section Title-->
         <!--View all button-->
+<<<<<<< HEAD
         <button class="sb-btn sb-btn-xs sb-btn-secondary ml-auto" type="button"
             *ngIf="section.contents.length >= 10" (click)="navigateToViewAll(section)" tabindex="0"
             appTelemetryInteract
+=======
+        <button class="sb-btn custom-nulp-button ml-auto" type="button" *ngIf="section.contents.length >= 10"
+            (click)="navigateToViewAll(section)" tabindex="0" appTelemetryInteract
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
             [telemetryInteractEdata]="{id:'viewall-button' , type:'click' ,pageid:pageid , extra : {section: section.name}}">
             {{ resourceService.frmelmnts.lnk.viewall}}
         </button>

@@ -372,4 +372,28 @@ getActivity(groupId, activity, mergeGroup, leafNodesCount?) {
   getDashletData(courseHeirarchyData, aggData) {
     return this.groupCservice.activityService.getDataForDashlets(courseHeirarchyData, aggData);
   }
+<<<<<<< HEAD
+=======
+
+  getUserList(requestParam: SearchParam = {}): Observable<ServerResponse> {
+
+    const option = {
+      url: this.configService.urlConFig.URLS.ADMIN.USER_SEARCH,
+      data: {
+        request: {
+          filters: requestParam.filters || {},
+          query: requestParam.query || ''
+        }
+      }
+    };
+
+    // option.data.request.filters['rootOrgId'] = this.userService.rootOrgId;
+
+    return this.learnerService.post(option).pipe(map((data) => {
+      return data;
+    }));
+
+}
+
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
 }

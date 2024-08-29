@@ -8,7 +8,7 @@ import { CourseConsumptionService, CourseBatchService } from './../../../service
 import { IImpressionEventInput, IInteractEventEdata, IInteractEventObject, TelemetryService } from '@sunbird/telemetry';
 import * as _ from 'lodash-es';
 import dayjs from 'dayjs';
-import { Subject, combineLatest } from 'rxjs';
+import { Subject, combineLatest, forkJoin } from 'rxjs';
 import { LazzyLoadScriptService } from 'LazzyLoadScriptService';
 import { ConfigService } from '@sunbird/shared';
 import { CsModule } from '@project-sunbird/client-services';
@@ -243,6 +243,7 @@ export class CreateBatchComponent implements OnInit, OnDestroy, AfterViewInit {
     mentors = $('#mentors').dropdown('get value') ? $('#mentors').dropdown('get value').split(',') : [];
     if (this.createBatchForm.value.enrollmentType !== 'open') {
       participants = $('#participants').dropdown('get value') ? $('#participants').dropdown('get value').split(',') : [];
+      participants = participants.filter(participantId => !mentors.some(mentorId => mentorId == participantId));
     }
     const startDate = dayjs(this.createBatchForm.value.startDate).format('YYYY-MM-DD');
     const endDate = this.createBatchForm.value.endDate && dayjs(this.createBatchForm.value.endDate).format('YYYY-MM-DD');
@@ -286,9 +287,17 @@ export class CreateBatchComponent implements OnInit, OnDestroy, AfterViewInit {
     const userRequest = {
       userIds: _.compact(participants)
     };
+<<<<<<< HEAD
     this.courseBatchService.addUsersToBatch(userRequest, batchId).pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         this.disableSubmitBtn = false;
+=======
+    // console.log(userRequest.userIds[0]);
+    forkJoin( 
+      userRequest.userIds.map(id =>
+        this.courseBatchService.addUsersToBatch(id, batchId,this.courseId).pipe(takeUntil(this.unsubscribe))
+      )).subscribe((res) => {
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
         this.toasterService.success(this.resourceService.messages.smsg.m0033);
         this.reload();
         this.checkIssueCertificate(batchId);
@@ -340,9 +349,13 @@ export class CreateBatchComponent implements OnInit, OnDestroy, AfterViewInit {
       $('#mentors').dropdown({
         fullTextSearch: true,
         forceSelection: false,
+<<<<<<< HEAD
         onAdd: () => {
         }
       });
+=======
+    });
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
       $('#participants input.search').on('keyup', (e) => {
         this.getUserListWithQuery($('#participants input.search').val(), 'participant');
       });
@@ -369,7 +382,7 @@ export class CreateBatchComponent implements OnInit, OnDestroy, AfterViewInit {
       filters: {'status': '1'},
       query: query
     };
-    this.courseBatchService.getUserList(requestBody).pipe(takeUntil(this.unsubscribe))
+    this.courseBatchService.getUserList(requestBody,type).pipe(takeUntil(this.unsubscribe))
       .subscribe((res) => {
         const list = this.sortUsers(res);
         if (type === 'participant') {

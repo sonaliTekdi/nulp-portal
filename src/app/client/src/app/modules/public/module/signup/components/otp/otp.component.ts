@@ -146,9 +146,10 @@ resendOtpEnablePostTimer() {
     };
   }
 
-  createUser(data?: any) {
+ createUser(data?: any) {
     let identifier = '';
     const createRequest = {
+<<<<<<< HEAD
       params: {
         source: _.get(this.activatedRoute, 'snapshot.queryParams.client_id'),
         signupType: 'self'
@@ -158,8 +159,20 @@ resendOtpEnablePostTimer() {
         'password': _.trim(this.signUpdata.controls.password.value),
         'dob': this.yearOfBirth,
       }
+=======
+        params: {
+            source: _.get(this.activatedRoute, 'snapshot.queryParams.client_id'),
+            signupType: 'self'
+        },
+        'request': {
+            'firstName': _.trim(_.get(this.startingForm, 'basicInfo.name')),
+            'password': _.trim(_.get(this.startingForm, 'emailPassInfo.password')),
+        }
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
     };
+
     if (this.mode === 'phone') {
+<<<<<<< HEAD
       createRequest.request['phone'] = this.signUpdata.controls.phone.value.toString();
       createRequest.request['phoneVerified'] = true;
       identifier = this.signUpdata.controls.phone.value.toString();
@@ -167,8 +180,19 @@ resendOtpEnablePostTimer() {
       createRequest.request['email'] = this.signUpdata.controls.email.value;
       createRequest.request['emailVerified'] = true;
       identifier = this.signUpdata.controls.email.value;
+=======
+        createRequest.request['phone'] = _.get(this.startingForm, 'emailPassInfo.key').toString();
+        createRequest.request['phoneVerified'] = true;
+        identifier = _.get(this.startingForm, 'emailPassInfo.key').toString();
+    } else {
+        createRequest.request['email'] = _.get(this.startingForm, 'emailPassInfo.key');
+        createRequest.request['emailVerified'] = true;
+        identifier = _.get(this.startingForm, 'emailPassInfo.key');
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
     }
+
     createRequest.request['reqData'] = _.get(data, 'reqData');
+<<<<<<< HEAD
     if (this.signUpdata.controls.tncAccepted.value && this.signUpdata.controls.tncAccepted.status === 'VALID') {
       this.signupService.createUserV3(createRequest).subscribe((resp: ServerResponse) => {
         this.telemetryLogEvents('sign-up', true);
@@ -201,8 +225,70 @@ resendOtpEnablePostTimer() {
           }
         }
       );
+=======
+
+    if (this.otpForm.controls.tncAccepted.value && this.otpForm.controls.tncAccepted.status === 'VALID') {
+        this.signupService.createUserV3(createRequest).subscribe((resp: ServerResponse) => {
+            this.telemetryLogEvents('sign-up', true);
+
+            const tncAcceptRequestBody = {
+                request: {
+                    version: this.tncLatestVersion,
+                    identifier: identifier
+                }
+            };
+
+            this.signupService.acceptTermsAndConditions(tncAcceptRequestBody).subscribe(res => {
+                this.telemetryLogEvents('accept-tnc', true);
+
+                this.customUserCreation(resp.result.userId);
+
+                this.redirectToSignPage();
+            }, (err) => {
+                this.telemetryLogEvents('accept-tnc', false);
+
+                this.customUserCreation(resp.result.userId);
+
+                this.redirectToSignPage();
+            });
+        },
+        (err) => {
+            this.telemetryLogEvents('sign-up', false);
+            this.infoMessage = '';
+            this.errorMessage = this.resourceService.messages.fmsg.m0085;
+            this.disableSubmitBtn = false;
+            this.logCreateUserError(err.error.params.errmsg);
+            this.telemetryService.interact(this.createUserErrorInteractEdata);
+
+            if (err.status === 301) {
+                this.redirecterrorMessage = true;
+            } else {
+                this.redirecterrorMessage = false;
+            }
+        });
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
     }
-  }
+}
+
+customUserCreation(identifier: string) {
+    const customData = {
+        "user_id": identifier,
+        "designation": _.trim(_.get(this.startingForm, 'basicInfo.designation')),
+        "user_type": _.trim(_.get(this.startingForm, 'basicInfo.userType')),
+        "organisation": _.trim(_.get(this.startingForm, 'basicInfo.organisation')),
+        "created_by":identifier,
+    };
+
+    this.signupService.CreateUser(customData).subscribe(
+        (response) => {
+            console.log('Custom user created successfully', response);
+        },
+        (error) => {
+            console.error('Error creating custom user', error);
+        }
+    );
+}
+
 
   /**
    * Redirects to sign in Page with success message

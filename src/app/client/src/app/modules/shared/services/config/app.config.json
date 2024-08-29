@@ -2,11 +2,7 @@
   "UrlLinks": {
     "downloadDikshaApp": "https://play.google.com/store/apps/details?id=in.gov.diksha.app"
   },
-  "layoutConfiguration": {
-    "source": "",
-    "name": "newLayout",
-    "options": ""
-  },
+  "layoutConfiguration": null,
   "CommonSearch": {
     "contentType": [
       "Collection",
@@ -1165,7 +1161,7 @@
     ]
   },
   "DASHBOARD": {
-    "PAGE_LIMIT": 200
+    "PAGE_LIMIT": 20
   },
   "CONTENT_CONST": {
     "CREATE_LESSON": "application/vnd.ekstep.ecml-archive"

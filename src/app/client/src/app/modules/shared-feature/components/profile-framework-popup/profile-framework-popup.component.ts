@@ -94,13 +94,18 @@ export class ProfileFrameworkPopupComponent implements OnInit, OnDestroy {
       // if (_.get(this.selectedOption, 'board[0]')) {
         this.selectedOption.board = _.get(this.selectedOption, 'board[0]');
         this.frameWorkId = _.get(_.find(this.custOrgFrameworks, { 'name': this.selectedOption.board }), 'identifier');
+<<<<<<< HEAD
         console.log(this.frameWorkId)
+=======
+
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
         return this.getFormatedFilterDetails().pipe(map((formFieldProperties) => {
           this._formFieldProperties = formFieldProperties;
           // this.mergeBoard(); // will merge board from custodian org and board from selected framework data
           // return this.getUpdatedFilters(board, true);
           return this._formFieldProperties;
         }));
+<<<<<<< HEAD
       // } 
       // else {
       //   const fieldOptions = [board,
@@ -110,6 +115,18 @@ export class ProfileFrameworkPopupComponent implements OnInit, OnDestroy {
       //   return of(fieldOptions);
       // }
     // }));
+=======
+      } else {
+        let userType = localStorage.getItem('userType');
+        userType == "administrator" ? board.required = true  : null;
+        const fieldOptions = [board,
+          { code: 'medium', label: 'Language', index: 2 },
+          { code: 'gradeLevel', label: 'Sub-Category', index: 3 },
+          { code: 'subject', label: 'Topic', index: 4 }];
+        return of(fieldOptions);
+      }
+    }));
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
   }
   private getCustodianOrgDataForGuest() {
     return this.channelService.getFrameWork(this.guestUserHashTagId).pipe(map((channelData: any) => {
@@ -117,7 +134,7 @@ export class ProfileFrameworkPopupComponent implements OnInit, OnDestroy {
       this.custOrgFrameworks = _.sortBy(this.custOrgFrameworks, 'index');
       return {
         range: this.custOrgFrameworks,
-        label: 'Board',
+        label: 'Category',
         code: 'board',
         index: 1
       };
@@ -139,6 +156,7 @@ export class ProfileFrameworkPopupComponent implements OnInit, OnDestroy {
           // return this.getUpdatedFilters(board, true);
           return this._formFieldProperties;
         }));
+<<<<<<< HEAD
       // } 
       
       // else {
@@ -149,6 +167,16 @@ export class ProfileFrameworkPopupComponent implements OnInit, OnDestroy {
       //   return of(fieldOptions);
       // }
     // }));
+=======
+      } else {
+        const fieldOptions = [board,
+          { code: 'medium', label: 'Language', index: 2 },
+          { code: 'gradeLevel', label: 'Sub-Category', index: 3 },
+          { code: 'subject', label: 'Topic', index: 4 }];
+        return of(fieldOptions);
+      }
+    }));
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
   }
   private getFormOptionsForOnboardedUser() {
     return this.getFormatedFilterDetails().pipe(map((formFieldProperties) => {
@@ -269,7 +297,7 @@ export class ProfileFrameworkPopupComponent implements OnInit, OnDestroy {
       this.custOrgFrameworks = _.sortBy(this.custOrgFrameworks, 'index');
       return {
         range: this.custOrgFrameworks,
-        label: 'Board',
+        label: 'Category',
         code: 'board',
         index: 1
       };

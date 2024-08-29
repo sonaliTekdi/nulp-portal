@@ -12,6 +12,13 @@ import { IImpressionEventInput } from '@sunbird/telemetry';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { TelemetryService } from '@sunbird/telemetry';
 import { VERIFY_USER, USER_SEARCH } from '../../interfaces/telemetryConstants';
+<<<<<<< HEAD
+=======
+import { sessionKeys } from '../../../../modules/groups';
+import { LazzyLoadScriptService } from 'LazzyLoadScriptService';
+import { Angular2Csv } from 'angular2-csv';
+
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
 @Component({
   selector: 'app-add-member',
   templateUrl: './add-member.component.html',
@@ -38,6 +45,16 @@ export class AddMemberComponent implements OnInit, OnDestroy {
   isCaptchEnabled = false;
   layoutConfiguration: any;
   public VERIFY_USER = VERIFY_USER;
+<<<<<<< HEAD
+=======
+  private userService: UserService;
+  userList = [];
+  notAddedUserList = [];
+  file: any;
+  activateUpload: boolean;
+  private userSearchTime: any;
+  showCSVUpload = false;
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
 
   constructor(public resourceService: ResourceService, private groupsService: GroupsService,
     private toasterService: ToasterService,
@@ -47,8 +64,19 @@ export class AddMemberComponent implements OnInit, OnDestroy {
     private location: Location,
     public recaptchaService: RecaptchaService,
     public telemetryService: TelemetryService,
+<<<<<<< HEAD
     public layoutService: LayoutService
     ) {
+=======
+    public layoutService: LayoutService,
+    userService: UserService,
+    private lazzyLoadScriptService: LazzyLoadScriptService,
+  ) {
+   this.userService = userService;
+    if (this.userService.userProfile.userRoles.includes("ORG_ADMIN") || this.userService.userProfile.userRoles.includes("ADMIN")) {
+      this.showCSVUpload = true;
+    }
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
   }
 
   ngOnInit() {
@@ -145,6 +173,31 @@ export class AddMemberComponent implements OnInit, OnDestroy {
     }
     return false;
   }
+  public fileChanged(event) {
+    this.file = event.target.files[0];
+    this.activateUpload = true;
+  }
+  uploadUsersCSV(){
+    let reader: FileReader = new FileReader();   
+    reader.readAsText(this.file);
+    reader.onload = (e) => {
+      let csv:string = reader.result as string;
+      var memberstoAdd = this.csvToArr(csv);
+      const member = {members: memberstoAdd};
+      this.addMembersById(member);
+    }
+  }
+   csvToArr(csv) {
+   
+    const [keys, ...rest] = csv.trim( ).split("\n").map((item) => item.split(','));
+    
+  const formedArr = rest.map((item) => {
+    const object = {};
+    keys.forEach((key, index) => (object[key] = item.at(index)));
+    return object;
+  });
+  return formedArr;
+  }
 
   addMemberToGroup() {
     this.setInteractData('add-user-to-group', {}, {id: _.get(this.verifiedMember, 'id'),  type: 'Member'});
@@ -169,8 +222,127 @@ export class AddMemberComponent implements OnInit, OnDestroy {
       });
     }
   }
+  private getUserListWithQuery(query) {
+    if (this.userSearchTime) {
+      clearTimeout(this.userSearchTime);
+    }
+    this.userSearchTime = setTimeout(() => {
+      this.getUserList(query);
+    }, 1000);
+  }
+  private getUserList(query: string = '') {
+    const requestBody = {
+      filters: {'status': '1'},
+      query: query
+    };
+    this.groupsService.getUserList(requestBody).subscribe((data) => {
+      const users = this.getUsers(data)
+      this.userList = users.userList;
+      this.getNotAddedUsers();
+      // this.initDropDown();
+    })
+  }
 
+<<<<<<< HEAD
   showErrorMsg(response?) {
+=======
+  private initDropDown() {
+    this.lazzyLoadScriptService.loadScript('semanticDropdown.js').subscribe(() => {
+      $('#users').dropdown({
+        forceSelection: false,
+        fullTextSearch: true,
+        onAdd: () => {
+        }
+      });
+      $('#users input.search').on('keyup', (e) => {
+        this.getUserListWithQuery($('#users input.search').val());
+      });
+      // $('#mentors input.search').on('keyup', (e) => {
+      //   this.getUserListWithQuery($('#mentors input.search').val(), 'mentor');
+      // });
+    });
+  }
+
+  private getUsers(res) {
+    const userList = [];
+    if (res.result.response.content && res.result.response.content.length > 0) {
+      _.forEach(res.result.response.content, (userData) => {
+                if (userData.identifier !== this.userService.userid) {
+          const user = {
+            id: userData.identifier,
+            name: userData.firstName + (userData.lastName ? ' ' + userData.lastName : ''),
+            avatar: userData.avatar,
+            otherDetail: this.getUserOtherDetail(userData)
+          };
+          userList.push(user);
+        }
+      });
+    }
+    return {
+      userList: _.uniqBy(userList, 'id'),
+    };
+  }
+
+  private getUserOtherDetail(userData) {
+    if (userData.maskedEmail && userData.maskedPhone) {
+      return ' (' + userData.maskedEmail + ', ' + userData.maskedPhone + ')';
+    }
+    if (userData.maskedEmail && !userData.maskedPhone) {
+      return ' (' + userData.maskedEmail + ')';
+    }
+    if (!userData.maskedEmail && userData.maskedPhone) {
+      return ' (' + userData.maskedPhone + ')';
+    }
+  }
+
+  addMemberToGroupByDropdown() {
+    let users = [];
+    users = $('#users').dropdown('get value') ? $('#users').dropdown('get value').split(',') : [];
+
+    $('#users').dropdown('restore defaults')
+
+    if (!users.length) {
+      this.toasterService.error("Please Select user to add");
+      return;
+    }
+    
+    const memberstoAdd =  users.map((user) => ({userId: user, role: 'member'}))
+    const member = {members: memberstoAdd};
+    this.addMembersById(member);
+  }
+
+  addMembersById(member){
+    const groupId = _.get(this.groupData, 'id') || _.get(this.activatedRoute.snapshot, 'params.groupId');
+    this.groupsService.addMembersById(groupId, member).pipe(takeUntil(this.unsubscribe$)).subscribe(response => {
+      this.getUpdatedGroupData();
+
+      this.disableBtn = false;
+      const value = _.isEmpty(response.error) ? this.toasterService.success((this.resourceService.messages.smsg.m004).replace('{memberName}',
+        "Member")) : this.showErrorMsg(response, "selection");
+        this.memberId = '';
+        this.reset();
+    }, err => {
+      this.groupsService.emitShowLoader(false);
+      this.disableBtn = false;
+      this.memberId = '';
+      this.reset();
+      this.showErrorMsg();
+    });    
+  }
+
+
+
+  getNotAddedUsers() {
+    const existingUsersIds = this.membersList.map(({userId}) => userId)
+    const nonExistingUsers = _.filter(this.userList, (value, key) => {
+     return !_.includes(existingUsersIds, value.id);
+    });
+    this.notAddedUserList = nonExistingUsers;
+    return nonExistingUsers;
+  }
+
+  showErrorMsg(response?, from = "") {
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
 
     if (_.get(response, 'error.members[0].errorCode') === 'EXCEEDED_MEMBER_MAX_LIMIT') {
       this.toasterService.error(this.resourceService.messages.groups.emsg.m002);
@@ -231,6 +403,26 @@ export class AddMemberComponent implements OnInit, OnDestroy {
     }
     this.telemetryService.interact(interactData);
   }
+   /**
+ * This method helps to download a sample csv file
+ */
+    public downloadSampleCSV() {
+      const options = {
+        fieldSeparator: ',',
+        // quoteStrings: '"',
+        decimalseparator: '.',
+        showLabels: true,
+        useBom: false,
+        headers: ['userId', 'role'],
+      };
+      const csvData = [{
+        'userId': '',
+        'role': ''
+      }];
+     
+        const csv = new Angular2Csv(csvData, 'Sample_members', options);
+     
+    }
 
   ngOnDestroy() {
     this.unsubscribe$.next();

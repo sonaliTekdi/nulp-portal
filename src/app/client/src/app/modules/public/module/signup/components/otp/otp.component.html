@@ -1,6 +1,68 @@
+<<<<<<< HEAD
 <!-- <p *ngIf="mode === 'phone' && !showSignUpLink" class="line-height-1-3 grey text text-center mb-50">{{resourceService.frmelmnts.instn.t0081 | interpolate:'{instance}': instance}}</p>
 <p *ngIf="mode === 'email' && !showSignUpLink" class="line-height-1-3 grey text text-center mb-50">{{resourceService.frmelmnts.instn.t0082 | interpolate:'{instance}': instance}}</p> -->
 
+=======
+<!-- user-details gray box new design -->
+ <div class="user-detail-container p-24 my-16"role="list">
+  <div class="user-detail-list" role="listitem" tabindex="0" attr.aria-label="Name:{{startingForm?.basicInfo?.name}}"  *ngIf="startingForm && startingForm?.basicInfo?.name">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">Name:</label>
+    <label class="label-values fnormal font-weight-bold">{{startingForm?.basicInfo?.name}}</label>
+  </div>
+   <div class="user-detail-list" role="listitem" tabindex="0" attr.aria-label="designation:{{startingForm?.basicInfo?.designation}}"  *ngIf="startingForm && startingForm?.basicInfo?.designation">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">designation:</label>
+    <label class="label-values fnormal font-weight-bold">{{startingForm?.basicInfo?.designation}}</label>
+  </div>
+   <div class="user-detail-list" role="listitem" tabindex="0" attr.aria-label="userType:{{startingForm?.basicInfo?.userType}}"  *ngIf="startingForm && startingForm?.basicInfo?.userType">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">userType:</label>
+    <label class="label-values fnormal font-weight-bold">{{startingForm?.basicInfo?.userType}}</label>
+  </div>
+   <div class="user-detail-list" role="listitem" tabindex="0" attr.aria-label="organisation:{{startingForm?.basicInfo?.organisation}}"  *ngIf="startingForm && startingForm?.basicInfo?.organisation">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">organisation:</label>
+    <label class="label-values fnormal font-weight-bold">{{startingForm?.basicInfo?.organisation}}</label>
+  </div>
+  <div class="user-detail-list" role="listitem" tabindex="0"  attr.aria-label="Year of Birth:{{startingForm?.basicInfo?.yearOfBirth}}" *ngIf="startingForm && startingForm?.basicInfo?.yearOfBirth">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">Year of Birth:</label>
+    <label class="label-values fnormal font-weight-bold">{{startingForm?.basicInfo?.yearOfBirth}}</label>
+  </div>
+  <div class="user-detail-list" role="listitem" tabindex="0"  attr.aria-label="State:{{startingForm?.onboardingInfo?.children?.persona?.state?.name}}" *ngIf="startingForm && startingForm?.onboardingInfo?.children?.persona?.state?.name">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">State:</label>
+    <label
+      class="label-values fnormal font-weight-bold">{{startingForm?.onboardingInfo?.children?.persona?.state?.name}}</label>
+  </div>
+  <div class="user-detail-list" role="listitem" tabindex="0"  attr.aria-label="District:{{startingForm?.onboardingInfo?.children?.persona?.district?.name}}" *ngIf="startingForm && startingForm?.onboardingInfo?.children?.persona?.district?.name">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">District:</label>
+    <label
+      class="label-values fnormal font-weight-bold">{{startingForm?.onboardingInfo?.children?.persona?.district?.name}}</label>
+  </div>
+  <div class="user-detail-list" role="listitem" tabindex="0"  attr.aria-label="School:{{startingForm?.onboardingInfo?.children?.persona?.school?.name}}" *ngIf="startingForm && startingForm?.onboardingInfo?.children?.persona?.school?.name">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">School:</label>
+    <label
+      class="label-values fnormal font-weight-bold">{{startingForm?.onboardingInfo?.children?.persona?.school?.name}}</label>
+  </div>
+  <div class="user-detail-list" role="listitem" tabindex="0"  attr.aria-label="Block:{{startingForm?.onboardingInfo?.children?.persona?.block?.name}}" *ngIf="startingForm && startingForm?.onboardingInfo?.children?.persona?.block?.name">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">Block:</label>
+    <label
+      class="label-values fnormal font-weight-bold">{{startingForm?.onboardingInfo?.children?.persona?.block?.name}}</label>
+  </div>
+  <div class="user-detail-list" role="listitem" tabindex="0"  attr.aria-label="Cluster:{{startingForm?.onboardingInfo?.children?.persona?.cluster?.name}}" *ngIf="startingForm && startingForm?.onboardingInfo?.children?.persona?.cluster?.name">
+    <label class="label-names fnormal font-weight-normal pr-8" role="heading">Cluster:</label>
+    <label
+      class="label-values fnormal font-weight-bold">{{startingForm?.onboardingInfo?.children?.persona?.cluster?.name}}</label>
+  </div>
+</div>
+<!-- user-details gray box new design end-->
+<div class="signup-form-content">
+<!-- <p *ngIf="mode === 'phone' && !showSignUpLink" class="line-height-1-3 grey text text-center mb-50">{{resourceService.frmelmnts.instn.t0081 | interpolate:'{instance}': instance}}</p>
+<p *ngIf="mode === 'email' && !showSignUpLink" class="line-height-1-3 grey text text-center mb-50">{{resourceService.frmelmnts.instn.t0082 | interpolate:'{instance}': instance}}</p> -->
+
+<!-- <div class="grey text text-center pt-16">{{resourceService.frmelmnts.lbl.OTPhasbeensent}} {{resourceService.frmelmnts.lbl.toYourEmailPhone}}</div>-->
+<div tabindex="0" class="grey text text-center otp-label">
+  <span *ngIf="emailAddress">{{resourceService.frmelmnts.lbl.OTPhasbeensentToEmail}}:<br><b>{{emailAddress}}</b></span>
+  <!-- <span *ngIf="phoneNumber">{{resourceService.frmelmnts.lbl.OTPhasbeensentToPhone}}:<br><b>{{phoneNumber}}</b></span> -->
+</div>
+<div tabindex="0" class="grey text text-center mb-16 grey-text">{{resourceService.frmelmnts.lbl.OTPvalid}}</div>
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
 
 
 <!-- <div class="grey text text-center pt-16">{{resourceService.frmelmnts.lbl.OTPhasbeensent}} {{resourceService.frmelmnts.lbl.toYourEmailPhone}}</div>-->

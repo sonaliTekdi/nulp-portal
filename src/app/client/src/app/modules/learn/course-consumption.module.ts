@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '@sunbird/shared';
 import { SharedFeatureModule } from '@sunbird/shared-feature';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   CoursePlayerComponent, CourseConsumptionHeaderComponent, CourseConsumptionPageComponent,
   CurriculumCardComponent  } from './components';
@@ -28,6 +28,7 @@ import { NotificationModule } from '../notification/notification.module';
 import { DiscussionModule } from '../discussion/discussion.module';
 import { PendingchangesGuard } from '@sunbird/public';
 import { GroupsModule } from '../groups';
+import { CourseProgressExhaustModule } from '../dashboard/course-progress-exhaust.module';
 
 
 export const csUserServiceFactory = (csLibInitializerService: CsLibInitializerService) => {
@@ -51,6 +52,7 @@ export const csCourseServiceFactory = (csLibInitializerService: CsLibInitializer
     SuiSelectModule, SuiModalModule, SuiAccordionModule, SuiPopupModule, SuiDropdownModule,
     SuiProgressModule, SuiRatingModule, SuiCollapseModule,
     FormsModule,
+    ReactiveFormsModule,
     CourseConsumptionRoutingModule,
     CoreModule,
     TelemetryModule,
@@ -58,7 +60,8 @@ export const csCourseServiceFactory = (csLibInitializerService: CsLibInitializer
     CommonConsumptionModule,
     NotificationModule,
     DiscussionModule,
-    GroupsModule
+    GroupsModule,
+    CourseProgressExhaustModule
   ],
   providers: [
     { provide: 'CS_USER_SERVICE', useFactory: csUserServiceFactory, deps: [CsLibInitializerService] },
@@ -67,6 +70,7 @@ export const csCourseServiceFactory = (csLibInitializerService: CsLibInitializer
   ],
   declarations: [CoursePlayerComponent, CourseConsumptionHeaderComponent, AssessmentPlayerComponent,
     CourseConsumptionPageComponent, BatchDetailsComponent, CurriculumCardComponent, UnEnrollBatchComponent,
-    AssessmentPlayerComponent, CourseCompletionComponent, CourseDetailsComponent, CertificateNameUpdatePopupComponent]
+    AssessmentPlayerComponent, CourseCompletionComponent, CourseDetailsComponent, CertificateNameUpdatePopupComponent,
+    ]
 })
 export class CourseConsumptionModule { }

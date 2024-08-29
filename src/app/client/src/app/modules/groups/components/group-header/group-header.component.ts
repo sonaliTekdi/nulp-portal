@@ -252,7 +252,11 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
         'cid': this.forumIds
       };
       this.discussionService.removeForum(requestBody).subscribe(resp => {
+<<<<<<< HEAD
         this.showLoader = false;
+=======
+        location.reload();
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
         this.toasterService.success('Disabled discussion forum successfully');
         this.fetchForumIds(this.groupData.id);
       }, error => {
@@ -266,7 +270,11 @@ export class GroupHeaderComponent implements OnInit, OnDestroy {
       this.addTelemetry('confirm-enable-forum', {status: _.get(this.groupData, 'status')});
       this.showLoader = true;
       this.discussionService.createForum(this.createForumRequest).subscribe(resp => {
+<<<<<<< HEAD
         this.showLoader = false;
+=======
+        location.reload();
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
         this.toasterService.success('Enabled discussion forum successfully');
         this.fetchForumIds(this.groupData.id);
       }, error => {

@@ -109,6 +109,7 @@
       "CHECK_USER_EXISTS": "user/v1/exists",
       "CREATE_V2": "user/v2/create",
       "SIGN_UP_V1": "user/v2/signup",
+      "COSTOMSIGNUP":"custom/user/signup",
       "LOCATION_SEARCH": "data/v1/location/search",
       "TYPE": "user/v1/type/list",
       "VALIDATE_CERTIFICATE": "certreg/v1/certs/validate",
@@ -207,12 +208,23 @@
     "BATCH": {
       "CREATE": "course/v1/batch/create",
       "UPDATE": "course/v1/batch/update",
+<<<<<<< HEAD
       "ADD_USERS": "course/v1/batch/user/add",
       "GET_DETAILS": "course/v1/batch/read",
       "GET_PARTICIPANT_LIST": "course/v1/batch/participants/list",
       "GET_BATCHS": "course/v1/batch/list",
       "REMOVE_USERS": "course/v1/batch/user/remove"
     },
+=======
+      "ADD_USERS": "course/v1/admin/enroll",
+      "GET_DETAILS": "course/v1/batch/read",
+      "GET_PARTICIPANT_LIST": "course/v1/batch/participants/list",
+      "GET_BATCHS": "course/v1/batch/list",
+      "REMOVE_USERS": "course/v1/admin/unenroll",
+      "COURSE_PROGRESS_EXHAUST": "course/v1/progress/reports",
+      "COURSE_PROGRESS_EXHAUST_CSV": "course/v1/progress/reports/csv"
+    }, 
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
     "ADMIN": {
       "USER_SEARCH": "user/v3/search",
       "ORG_SEARCH": "org/v2/search",

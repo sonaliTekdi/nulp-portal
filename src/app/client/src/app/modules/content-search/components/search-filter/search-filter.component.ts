@@ -48,6 +48,7 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
 
   @ViewChild('sbSearchFrameworkFilterComponent') searchFrameworkFilterComponent: any;
   filterFormTemplateConfig: IFrameworkCategoryFilterFieldTemplateConfig[];
+
   private _filterConfig$ = defer(() => of([
     {
       category: 'board',
@@ -59,22 +60,32 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
     {
       category: 'gradeLevel',
       type: 'dropdown',
+<<<<<<< HEAD
       labelText: _.get(this.resourceService, 'frmelmnts.lbl.class'),
       placeholderText: 'Select Sub-Category',
+=======
+      labelText: _.get(this.resourceService, 'frmelmnts.lbl.medium'),
+      placeholderText: 'Select language',
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
       multiple: true
     },
     {
       category: 'medium',
       type: 'dropdown',
+<<<<<<< HEAD
       labelText: _.get(this.resourceService, 'frmelmnts.lbl.medium'),
       placeholderText: 'Select Language',
+=======
+      labelText: _.get(this.resourceService, 'frmelmnts.lbl.class'),
+      placeholderText: 'Select Sub-Category',
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
       multiple: true
     },
     {
       category: 'subject',
       type: 'dropdown',
       labelText: _.get(this.resourceService, 'frmelmnts.lbl.subject'),
-      placeholderText: 'Select Subject',
+      placeholderText: 'Select Topic',
       multiple: true
     },
     // {
@@ -164,6 +175,8 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
       const queryParams = { ...this.defaultFilters, selectedTab: _.get(this.activatedRoute, 'snapshot.queryParams.selectedTab') || _.get(this.defaultTab, 'contentType') || 'textbook' };
       this.router.navigate([], { queryParams, relativeTo: this.activatedRoute } );
     }
+
+    // console.log("ngOnInit");
   }
   private boardChangeHandler() {
     return this.boardChange$.pipe(
@@ -421,7 +434,11 @@ export class SearchFilterComponent implements OnInit, OnDestroy {
       switchMap(_ => this._filterConfig$),
       tap((config: IFrameworkCategoryFilterFieldTemplateConfig[]) => {
         this.filterFormTemplateConfig = config;
+<<<<<<< HEAD
         console.log("_filterConfig-----", config);
+=======
+        // console.log("filterFormTemplateConfig", this.filterFormTemplateConfig);
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
         this.refreshSearchFilterComponent = false;
         this.cdr.detectChanges();
         this.refreshSearchFilterComponent = true;

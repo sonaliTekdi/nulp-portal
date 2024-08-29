@@ -120,10 +120,10 @@ export class MyGroupsComponent implements OnInit, OnDestroy {
     this.selectedType = acceptTnc.GROUP;
     this.selectedGroup = event.data;
     this.showTncModal = _.get(event, 'data.visited') === false;
-
-    if (!this.showTncModal) {
-      this.navigate(event);
-    }
+    this.navigate(event);
+    // if (!this.showTncModal) {
+    //   this.navigate(event);
+    // }
   }
 
   navigate(event) {

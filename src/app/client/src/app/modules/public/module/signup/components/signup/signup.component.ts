@@ -69,6 +69,7 @@ export class SignupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent);
+<<<<<<< HEAD
     this.tncService.getTncConfig().subscribe((data: ServerResponse) => {
       this.telemetryLogEvents('fetch-terms-condition', true);
         const response = _.get(data, 'result.response.value');
@@ -87,6 +88,10 @@ export class SignupComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     );
     this.instance = _.upperCase(this.resourceService.instance || 'SUNBIRD');
+=======
+    this.instance = _.upperCase(this.resourceService.instance || 'NULP');
+    
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
     this.tenantDataSubscription = this.tenantService.tenantData$.subscribe(
       data => {
         if (data && !data.err) {
@@ -174,6 +179,7 @@ export class SignupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   initializeFormFields() {
+<<<<<<< HEAD
     this.signUpForm = this.sbFormBuilder.group({
       name: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
@@ -347,6 +353,12 @@ export class SignupComponent implements OnInit, OnDestroy, AfterViewInit {
           this.signUpForm.controls.phone.value.toString() : this.signUpForm.controls.email.value,
         'type': this.signUpForm.controls.contactType.value.toString()
       }
+=======
+    this.signUpForm = {
+      basicInfo: null,
+      // onboardingInfo: null,
+      emailPassInfo: null
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
     };
     if (this.isMinor) {
       request.request['templateId'] = this.configService.constants.TEMPLATES.VERIFY_OTP_MINOR;
@@ -372,10 +384,31 @@ export class SignupComponent implements OnInit, OnDestroy, AfterViewInit {
     element.click();
   }
 
+<<<<<<< HEAD
   showParentForm(event) {
     if (event === 'true') {
       this.initializeFormFields();
       this.showSignUpForm = true;
+=======
+  subformInitialized(name: string, group: object) {
+    this.signUpForm[name] = group
+  }
+
+  changeStep() {
+    switch(this.signupStage) {
+      case this.Stage.BASIC_INFO:
+      //   this.signupStage = this.Stage.ONBOARDING_INFO;
+      //   break;
+      // case this.Stage.ONBOARDING_INFO:
+        this.signupStage = this.Stage.EMAIL_PASSWORD;
+        break;
+      case this.Stage.EMAIL_PASSWORD:
+        this.signupStage = this.Stage.OTP;
+        break;
+      default:
+        this.signupStage = this.Stage.BASIC_INFO;
+        break;
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
     }
   }
 
@@ -445,7 +478,14 @@ export class SignupComponent implements OnInit, OnDestroy, AfterViewInit {
     this.telemetryService.log(event);
   }
 
+<<<<<<< HEAD
   showAndHidePopup(mode: boolean) {
     this.showTncPopup = mode;
+=======
+  redirectToLogin () {
+    // this.router.navigate(['/resources/play/content']);
+    // this.router.navigate(['/resources']);
+    window.location.href = '/resources';
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
   }
 }

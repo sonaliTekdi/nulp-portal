@@ -59,6 +59,7 @@ export class ExplorePageComponent implements OnInit, OnDestroy, AfterViewInit {
     downloadIdentifier: string;
     contentDownloadStatus = {};
     isConnected = true;
+    isGuestUser: any;
     private _facets$ = new Subject();
     public showBatchInfo = false;
     public enrolledCourses: Array<any>;
@@ -365,7 +366,16 @@ export class ExplorePageComponent implements OnInit, OnDestroy, AfterViewInit {
         const _cacheTimeout = _.get(currentPageData, 'metaData.cacheTimeout') || 86400000;
         this.cacheService.set('searchFilters', filters, { expires: Date.now() + _cacheTimeout });
         this.showLoader = true;
+<<<<<<< HEAD
         this.selectedFilters = pick(filters, ['board', 'medium', 'gradeLevel', 'channel', 'subject']);
+=======
+        this.selectedFilters = pick(filters, _.get(currentPageData , 'metaData.filters'));
+       
+        // We dont have CBSC filter
+        // if (this.selectedFilters['board'][0] === 'CBSE/NCERT') {
+        //     this.selectedFilters['board'][0] = 'CBSE';
+        // }
+>>>>>>> 5503aff2e6dcfa1b5a0d928ac53986b088066d1e
         if (has(filters, 'audience') || (localStorage.getItem('userType') && currentPageData.contentType !== 'all')) {
             const userTypes = get(filters, 'audience') || [localStorage.getItem('userType')];
             // const userTypes = get(filters, 'audience');
@@ -571,6 +581,7 @@ export class ExplorePageComponent implements OnInit, OnDestroy, AfterViewInit {
             if (this.selectedTab === 'home') {
                 if (!this.userType) {
                     if (this.isUserLoggedIn()) {
+                        this.isGuestUser = false;
                     this.userService.userData$.subscribe((profileData: IUserData) => {
                         if (profileData
                             && profileData.userProfile
@@ -579,6 +590,7 @@ export class ExplorePageComponent implements OnInit, OnDestroy, AfterViewInit {
                         }
                     });
                 } else {
+                    this.isGuestUser = true;
                     const user = localStorage.getItem('userType');
                     if (user) {
                         this.userType = user;
